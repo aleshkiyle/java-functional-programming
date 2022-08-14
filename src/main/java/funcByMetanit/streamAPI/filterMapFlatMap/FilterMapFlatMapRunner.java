@@ -1,38 +1,26 @@
-package funcByMetanit.streamAPI;
+package funcByMetanit.streamAPI.filterMapFlatMap;
 
 import funcByMetanit.streamAPI.util.Phone;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-public class StreamAPIRunner {
+public class FilterMapFlatMapRunner {
 
-    private static final Logger logger = Logger.getLogger(StreamAPIRunner.class.getName());
+    private static final Logger logger = Logger.getLogger(FilterMapFlatMapRunner.class.getName());
 
     public static void main(String[] args) {
         List<String> cities = List.of("Paris", "London", "Madrid", "Brussel", "Ryazan");
         List<Phone> phones = List.of(new Phone("Iphone 8 plus",  45000),
                 new Phone("Iphone 12 pro", 65000),
                 new Phone("Samsung Galaxy s6", 35000));
-        StreamAPILogic streamAPILogic = new StreamAPILogic();
-
-        System.out.println("Create and outputting a stream of Integers:");
-        streamAPILogic.createAndPrintIntStream();
-        System.out.println("------------------------");
-
-        System.out.println("Create and outputting a stream of Doubles:");
-        streamAPILogic.createAndPrintDoubleStream();
-        System.out.println("------------------------");
-
-        System.out.println("Implement method forEach(Consumer):");
-        streamAPILogic.implementMethodForEach();
-        System.out.println("------------------------");
+        FilterMapFlatMapILogic streamAPILogic = new FilterMapFlatMapILogic();
 
         System.out.println("Implement method filter(Predicate):");
         streamAPILogic.implementFilterByCities(cities);
         System.out.println("------------------------");
 
-        System.out.println("Implement filter phone by price");
+        System.out.println("Implement filter phone by price(Predicate):");
         streamAPILogic.implementFilterPhonesByPrice(phones);
         System.out.println("-----------------------------");
 
