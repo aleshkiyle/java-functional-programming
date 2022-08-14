@@ -1,4 +1,4 @@
-package funcByMetanit.reduce;
+package funcByMetanit.streamAPI.reduce;
 
 import java.util.Optional;
 import java.util.stream.Stream;
