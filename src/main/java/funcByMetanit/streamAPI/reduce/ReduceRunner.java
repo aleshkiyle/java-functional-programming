@@ -2,12 +2,10 @@ package funcByMetanit.streamAPI.reduce;
 
 import funcByMetanit.streamAPI.reduce.data.Phone;
 
-import java.util.*;
-import java.util.logging.Logger;
+import java.util.List;
+import java.util.Optional;
 
 public class ReduceRunner {
-
-    private static final Logger LOGGER = Logger.getLogger(ReduceRunner.class.getName());
 
     public static void main(String[] args) {
         ReduceLogic reduceLogic = new ReduceLogic();
@@ -21,7 +19,7 @@ public class ReduceRunner {
         List<Integer> numbers = List.of(1, 2, 3, 4 ,5);
         Optional<Integer> mulNumbers = reduceLogic.implementMethodReduceStreamAPI(numbers);
         System.out.println("Product of numbers from a list: ");
-        checkNumberOptional(mulNumbers);
+        reduceLogic.checkNumberOptional(mulNumbers);
 
         List<String> words = List.of("mama", "mila", "ramu");
         Optional<String> patter = reduceLogic.implementMethodReduceStreamAPIWithWords(words);
@@ -36,28 +34,8 @@ public class ReduceRunner {
         );
         int sumPricePhones = reduceLogic.implementSumPricePhones(phones);
         System.out.println("Number of phones whose price is less than 50000: " + sumPricePhones);
-        testReduceMethodFromBaeldung();
+        reduceLogic.testReduceMethodFromBaeldung();
     }
 
-    private static void testReduceMethodFromBaeldung() {
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5);
-        int sum = numbers.stream()
-                .reduce(0, Integer::sum);
-        System.out.println(sum);
-        double mul = numbers.stream()
-                .reduce(1, (subtotal, element) -> subtotal * element).doubleValue();
-        System.out.println(mul);
-        List<Integer> ages = List.of(25, 30, 45, 28, 32);
-        int computedAges = ages.parallelStream()
-                .reduce(0, Integer::sum);
-        System.out.println(computedAges);
-    }
 
-    private static void checkNumberOptional(Optional<Integer> mulNumbers) {
-        if (mulNumbers.isPresent()) {
-            System.out.println("Mul numbers: " + mulNumbers.get());
-        } else {
-            LOGGER.info("numbers list is empty");
-        }
-    }
 }
