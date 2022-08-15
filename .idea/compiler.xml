@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="functional-programming-java" />
+        <module name="java-functional-programming" />
       </profile>
     </annotationProcessing>
   </component>
