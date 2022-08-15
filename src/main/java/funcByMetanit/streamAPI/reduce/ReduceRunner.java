@@ -2,14 +2,13 @@ package funcByMetanit.streamAPI.reduce;
 
 import funcByMetanit.streamAPI.reduce.data.Phone;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class ReduceRunner {
 
     private static final Logger LOGGER = Logger.getLogger(ReduceRunner.class.getName());
+
     public static void main(String[] args) {
         ReduceLogic reduceLogic = new ReduceLogic();
 
@@ -19,14 +18,14 @@ public class ReduceRunner {
         - T reduce(T identity, BinaryOperator<T> accumulator)
         - U reduce(T identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner)
         */
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+        List<Integer> numbers = List.of(1, 2, 3, 4 ,5);
         Optional<Integer> mulNumbers = reduceLogic.implementMethodReduceStreamAPI(numbers);
-        LOGGER.info( "Product of numbers from a list: ");
-        LOGGER.info("Mul numbers: " + mulNumbers.get());
+        System.out.println("Product of numbers from a list: ");
+        checkNumberOptional(mulNumbers);
 
         List<String> words = List.of("mama", "mila", "ramu");
         Optional<String> patter = reduceLogic.implementMethodReduceStreamAPIWithWords(words);
-        LOGGER.info("Patter: ");
+        System.out.println("Patter: ");
         patter.ifPresent(System.out::println);
 
         List<Phone> phones = List.of(
@@ -37,10 +36,10 @@ public class ReduceRunner {
         );
         int sumPricePhones = reduceLogic.implementSumPricePhones(phones);
         System.out.println("Number of phones whose price is less than 50000: " + sumPricePhones);
-        testReduceMethod();
+        testReduceMethodFromBaeldung();
     }
 
-    private static void testReduceMethod() {
+    private static void testReduceMethodFromBaeldung() {
         List<Integer> numbers = Arrays.asList(1,2,3,4,5);
         int sum = numbers.stream()
                 .reduce(0, Integer::sum);
@@ -52,5 +51,13 @@ public class ReduceRunner {
         int computedAges = ages.parallelStream()
                 .reduce(0, Integer::sum);
         System.out.println(computedAges);
+    }
+
+    private static void checkNumberOptional(Optional<Integer> mulNumbers) {
+        if (mulNumbers.isPresent()) {
+            System.out.println("Mul numbers: " + mulNumbers.get());
+        } else {
+            LOGGER.info("numbers list is empty");
+        }
     }
 }
