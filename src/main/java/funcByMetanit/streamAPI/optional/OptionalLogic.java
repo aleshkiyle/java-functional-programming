@@ -15,6 +15,7 @@ public class OptionalLogic implements OptionalLogicImpl {
     // Этот объект фактически обёртывает результат операции.
     // После выполнения операции с помощью метода get() объекта Optional мы можем получить его значение:
 
+    @Override
     public void implementOptionalFindMinNumberInList() {
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         List<Integer> emptyList = new ArrayList<>();
@@ -36,6 +37,7 @@ public class OptionalLogic implements OptionalLogicImpl {
         }
     }
 
+    @Override
     // Метод orELse(T other) позволяет определить альтернативное значение, которое будет возвращаться,
     // если Optional не получит из потока какого-нибудь значения
     public void implementMethodOrElseOptional(List<Integer> emptyList, List<Integer> numbers) {
@@ -48,6 +50,7 @@ public class OptionalLogic implements OptionalLogicImpl {
         System.out.println(max.orElse(CONST_NUMBER_FOR_OR_ELSE_METHOD));
     }
 
+    @Override
     // Метод orElseGet(Supplier supplier) - позволяет задать функцию, которая будет возвращать значение по умолчанию
     public void implementMethodOrElseGetOptional(List<Integer> numbers) {
         Optional<Integer> min = numbers.stream()
@@ -57,6 +60,7 @@ public class OptionalLogic implements OptionalLogicImpl {
     }
 
 
+    @Override
     // Метод orElseThrow() - позволяет сгенерировать исключение, если Optional не содержит значения
     public void implementMethodOrElseThrow(List<Integer> numbers) {
         Optional<Integer> min = numbers.stream()
@@ -64,6 +68,7 @@ public class OptionalLogic implements OptionalLogicImpl {
         System.out.println(min.orElseThrow(IllegalStateException::new));
     }
 
+    @Override
     // Метод ifPresent() - определяет действия со значением в Optional, если значения имеется.
     // В метод ifPresent() передаётся функция, которая принимает один параметр - значение из Optional.
     // В данном случае полученное максимальное число выводится на консоль. Но если бы массив numbers был бы пустым,
@@ -75,6 +80,7 @@ public class OptionalLogic implements OptionalLogicImpl {
         max.ifPresent(System.out::println);
     }
 
+    @Override
     // Метод ifPresentOrElse(Consumer consumer, Runnable runnable) - позволяет определить альтернативную логику
     // на случай, есл изначение в Optional отсутствует. В метод ifPresentOrElse() - передаются две функции.
     // Первая обрабатывает значение в Optional, если оно присуствует.

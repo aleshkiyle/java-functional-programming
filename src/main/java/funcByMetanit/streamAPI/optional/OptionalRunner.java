@@ -10,10 +10,12 @@ public class OptionalRunner {
         OptionalLogic optionalLogic = new OptionalLogic();
         optionalLogic.implementOptionalFindMinNumberInList();
         System.out.println("Implement method orElse(): ");
+
         BiConsumer<List<Integer>, List<Integer>> implementMethodOrElseOptional
                 = optionalLogic::implementMethodOrElseOptional;
         implementMethodOrElseOptional.accept(List.of(), List.of(1, 2, -5, 123));
         System.out.println("----------------------------------");
+
         System.out.println("Implement method orElseGet(): ");
         Consumer<List<Integer>> implementMethodOrElseGetOptional
                 = optionalLogic::implementMethodOrElseGetOptional;
