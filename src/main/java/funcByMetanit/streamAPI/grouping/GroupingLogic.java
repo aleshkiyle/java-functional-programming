@@ -2,10 +2,13 @@ package funcByMetanit.streamAPI.grouping;
 
 import funcByMetanit.streamAPI.grouping.data.Phone;
 
+import javax.xml.transform.sax.SAXSource;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -49,7 +52,7 @@ public class GroupingLogic implements GroupingLogicImpl {
         Map<String, Long> phonesByCompany = phones.stream()
                 .collect(Collectors.groupingBy(Phone::getCompany, Collectors.counting()));
 
-        for (Map.Entry<String, Long> item: phonesByCompany.entrySet()) {
+        for (Map.Entry<String, Long> item : phonesByCompany.entrySet()) {
             System.out.println(item.getKey() + " - " + item.getValue());
         }
     }
@@ -66,14 +69,39 @@ public class GroupingLogic implements GroupingLogicImpl {
         Map<String, Integer> phonesCompanyByPrice = phones.stream()
                 .collect(Collectors.groupingBy(Phone::getCompany, Collectors.summingInt(Phone::getPrice)));
 
-        for (Map.Entry<String, Integer> item: phonesCompanyByPrice.entrySet()) {
+        for (Map.Entry<String, Integer> item : phonesCompanyByPrice.entrySet()) {
             System.out.println(item.getKey() + " - " + item.getValue());
         }
     }
 
     @Override
     public void implementMethodsMaxByAndMinBy(List<Phone> phones) {
-        // TODO: 16.08.2022  
+        Map<String, Optional<Phone>> phoneMinByPrice = phones.stream()
+                .collect(Collectors.groupingBy(Phone::getCompany,
+                        Collectors.minBy(Comparator.comparing(Phone::getPrice))));
+
+        for (Map.Entry<String, Optional<Phone>> item: phoneMinByPrice.entrySet()) {
+
+            System.out.println(item.getKey());
+            item.getValue().ifPresentOrElse(
+                    System.out::println,
+                    () -> System.out.println("phone not found")
+            );
+            System.out.println();
+        }
+
+        Map<String, Optional<Phone>> phoneByMaxPrice = phones.stream()
+                .collect(Collectors.groupingBy(Phone::getCompany,
+                        Collectors.maxBy(Comparator.comparing(Phone::getPrice))));
+
+        for (Map.Entry<String, Optional<Phone>> item: phoneByMaxPrice.entrySet()) {
+            System.out.println(item.getKey());
+            item.getValue().ifPresentOrElse(
+                    System.out::println,
+                    () -> System.out.println("Value phone not found")
+            );
+            System.out.println();
+        }
     }
 
     @Override
