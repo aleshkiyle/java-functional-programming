@@ -15,5 +15,5 @@ public interface CollectLogicImpl {
 
     void implementMethodCollectCreateHashSet(Stream<String> phones);
 
-    void implementSecondFormMethodCollect(Stream<String> phones);
+    void implementSecondFormMethodCollect(List<String> phones);
 }

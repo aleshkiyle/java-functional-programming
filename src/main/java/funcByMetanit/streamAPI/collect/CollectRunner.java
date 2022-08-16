@@ -52,10 +52,9 @@ public class CollectRunner {
         System.out.println("___________________________________________");
 
         System.out.println("Implement second form method collect(supplier, biConsumer, combiner): ");
-        // Consumer<Stream<String>> consumerImplementSecondFormCollect
-        //         = collectLogic::implementSecondFormMethodCollect;
-        // consumerImplementSecondFormCollect.accept(PHONES_STRING_STREAM);
-        collectLogic.implementSecondFormMethodCollect(PHONES_STRING_STREAM);
+        Consumer<List<String>> consumerImplementSecondFormCollect
+                = collectLogic::implementSecondFormMethodCollect;
+        consumerImplementSecondFormCollect.accept(PHONES);
         System.out.println("_______________________________________________");
 
     }

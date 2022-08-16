@@ -3,12 +3,14 @@ package funcByMetanit.streamAPI.collect;
 import funcByMetanit.streamAPI.collect.data.Phone;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CollectLogic implements CollectLogicImpl {
@@ -58,10 +60,11 @@ public class CollectLogic implements CollectLogicImpl {
     // ! biConsumer - добавляет элемент в коллекцию
     // ! combiner - бинарная функция, которая объединяет два объекта
     @Override
-    public void implementSecondFormMethodCollect(Stream<String> phones) {
+    public void implementSecondFormMethodCollect(List<String> phones) {
         Predicate<String> phonePredicate = phone -> phone.length() < 10;
 
-        ArrayList<String> filteredPhones = phones.filter(phonePredicate)
+        List<String> filteredPhones = phones.stream()
+                .filter(phonePredicate)
                 .collect(
                         ArrayList::new, // создаём ArrayList
                         ArrayList::add, // добавляем в список элемент
@@ -76,6 +79,7 @@ public class CollectLogic implements CollectLogicImpl {
                 );
          */
 
+        System.out.println(filteredPhones.getClass());
         filteredPhones.forEach(System.out::println);
     }
 }
