@@ -1,6 +1,9 @@
 package funcByMetanit.streamAPI.reduce;
 
 import funcByMetanit.streamAPI.reduce.data.Phone;
+import funcByMetanit.streamAPI.reduce.data.Rating;
+import funcByMetanit.streamAPI.reduce.data.Review;
+import funcByMetanit.streamAPI.reduce.data.User;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.logging.Logger;
 public class ReduceRunner {
 
     private static final Logger LOGGER = Logger.getLogger(ReduceRunner.class.getName());
+
     public static void main(String[] args) {
         ReduceLogic reduceLogic = new ReduceLogic();
 
@@ -38,6 +42,8 @@ public class ReduceRunner {
         int sumPricePhones = reduceLogic.implementSumPricePhones(phones);
         System.out.println("Number of phones whose price is less than 50000: " + sumPricePhones);
         testReduceMethod();
+
+        System.out.println(ReduceRunner.implementReduceStreamAPIWithObjectsByBaeldung());
     }
 
     private static void testReduceMethod() {
@@ -52,5 +58,22 @@ public class ReduceRunner {
         int computedAges = ages.parallelStream()
                 .reduce(0, Integer::sum);
         System.out.println(computedAges);
+    }
+
+    private static double implementReduceStreamAPIWithObjectsByBaeldung() {
+        User john = new User("John", 30);
+        john.getRating().add(new Review(5, ""));
+        john.getRating().add(new Review(3, "not bad"));
+        User julie = new User("Julie", 35);
+        julie.getRating().add(new Review(4, "great!"));
+        julie.getRating().add(new Review(2, "terrible experience"));
+        julie.getRating().add(new Review(4, ""));
+        List<User> users = Arrays.asList(john, julie);
+
+        Rating averageRating = users.stream()
+                .reduce(new Rating(),
+                        (rating, user) -> Rating.average(rating, user.getRating()),
+                        Rating::average);
+        return averageRating.getPoints();
     }
 }
