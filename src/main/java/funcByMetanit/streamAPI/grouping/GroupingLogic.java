@@ -82,25 +82,19 @@ public class GroupingLogic implements GroupingLogicImpl {
 
         for (Map.Entry<String, Optional<Phone>> item: phoneMinByPrice.entrySet()) {
 
-            System.out.println(item.getKey());
-            item.getValue().ifPresentOrElse(
-                    System.out::println,
-                    () -> System.out.println("phone not found")
-            );
-            System.out.println();
+            StringBuilder stringBuilder = new StringBuilder();
+            System.out.println(stringBuilder.append(item.getKey()).append(" - ").append(item.getValue().get().getName()));
         }
 
         Map<String, Optional<Phone>> phoneByMaxPrice = phones.stream()
                 .collect(Collectors.groupingBy(Phone::getCompany,
                         Collectors.maxBy(Comparator.comparing(Phone::getPrice))));
 
-        for (Map.Entry<String, Optional<Phone>> item: phoneByMaxPrice.entrySet()) {
-            System.out.println(item.getKey());
-            item.getValue().ifPresentOrElse(
-                    System.out::println,
-                    () -> System.out.println("Value phone not found")
-            );
-            System.out.println();
+        System.out.println("Implement method maxBy: ");
+        for (Map.Entry<String, Optional<Phone>> item: phoneByMaxPrice   .entrySet()) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            System.out.println(stringBuilder.append(item.getKey()).append(" - ").append(item.getValue().get().getName()));
         }
     }
 

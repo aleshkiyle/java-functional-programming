@@ -42,9 +42,9 @@ public class GroupingRunner {
         consumerByCollectorsSumming.accept(PHONES);
         System.out.println("----------------------------------");
 
-        System.out.println("Implement method minBy and maxBy: ");
-        Consumer<List<Phone>> consumerMinByMethod = groupingLogic::implementMethodsMaxByAndMinBy;
-        consumerByCollectorsCounting.accept(PHONES);
+        System.out.println("Implement method minBy: ");
+        Consumer<List<Phone>> consumerMinByAndMaxByMethods = groupingLogic::implementMethodsMaxByAndMinBy;
+        consumerMinByAndMaxByMethods.accept(PHONES);
         System.out.println("--------------------------");
     }
 }
