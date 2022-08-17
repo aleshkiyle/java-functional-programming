@@ -46,5 +46,16 @@ public class GroupingRunner {
         Consumer<List<Phone>> consumerMinByAndMaxByMethods = groupingLogic::implementMethodsMaxByAndMinBy;
         consumerMinByAndMaxByMethods.accept(PHONES);
         System.out.println("--------------------------");
+
+        System.out.println("Implement method summarizingInt:");
+        Consumer<List<Phone>> consumerSummarizing = groupingLogic::implementMethodSummarizing;
+        consumerSummarizing.accept(PHONES);
+        System.out.println("-----------------------------------");
+
+        System.out.println("Implement method Collectors.mapping(): ");
+        Consumer<List<Phone>> consumerMethodCollectorsMapping =
+                groupingLogic::implementMethodMapping;
+        consumerMethodCollectorsMapping.accept(PHONES);
+        System.out.println("--------------------------------------");
     }
 }

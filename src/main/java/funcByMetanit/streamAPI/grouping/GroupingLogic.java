@@ -2,8 +2,8 @@ package funcByMetanit.streamAPI.grouping;
 
 import funcByMetanit.streamAPI.grouping.data.Phone;
 
-import javax.xml.transform.sax.SAXSource;
 import java.util.Comparator;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -80,7 +80,7 @@ public class GroupingLogic implements GroupingLogicImpl {
                 .collect(Collectors.groupingBy(Phone::getCompany,
                         Collectors.minBy(Comparator.comparing(Phone::getPrice))));
 
-        for (Map.Entry<String, Optional<Phone>> item: phoneMinByPrice.entrySet()) {
+        for (Map.Entry<String, Optional<Phone>> item : phoneMinByPrice.entrySet()) {
 
             StringBuilder stringBuilder = new StringBuilder();
             System.out.println(stringBuilder.append(item.getKey()).append(" - ").append(item.getValue().get().getName()));
@@ -91,20 +91,46 @@ public class GroupingLogic implements GroupingLogicImpl {
                         Collectors.maxBy(Comparator.comparing(Phone::getPrice))));
 
         System.out.println("Implement method maxBy: ");
-        for (Map.Entry<String, Optional<Phone>> item: phoneByMaxPrice   .entrySet()) {
+        for (Map.Entry<String, Optional<Phone>> item : phoneByMaxPrice.entrySet()) {
 
             StringBuilder stringBuilder = new StringBuilder();
-            System.out.println(stringBuilder.append(item.getKey()).append(" - ").append(item.getValue().get().getName()));
+            System.out.println(stringBuilder.append(item.getKey()).append(" - ").append(item.getValue()
+                    .orElse(new Phone("Iphone 12 pro", "Apple", 1000))
+                    .getName()));
         }
     }
 
     @Override
     public void implementMethodSummarizing(List<Phone> phones) {
-        // TODO: 16.08.2022  
+        Map<String, IntSummaryStatistics> priceSummary = phones.stream()
+                .collect(Collectors.groupingBy(Phone::getCompany,
+                        Collectors.summarizingInt(Phone::getPrice)));
+
+        for (Map.Entry<String, IntSummaryStatistics> item: priceSummary.entrySet()) {
+            System.out.println(item.getKey() + " - " + item.getValue().getAverage());
+        }
+
+        Map<String, IntSummaryStatistics> phoneSummaryStatics = phones.stream()
+                .collect(Collectors.groupingBy(Phone::getCompany, Collectors.summarizingInt(
+                        Phone::getPrice
+                )));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<String, IntSummaryStatistics> item: phoneSummaryStatics.entrySet()) {
+            stringBuilder.append(item.getKey()).append(" - ").append(item.getValue().getSum());
+        }
+        System.out.println(stringBuilder);
     }
 
     @Override
     public void implementMethodMapping(List<Phone> phones) {
-        // TODO: 16.08.2022  
+        Map<String, List<String>> phonesByCompany = phones.stream()
+                .collect(Collectors.groupingBy(Phone::getCompany,
+                        Collectors.mapping(Phone::getName, Collectors.toList())));
+
+        for (Map.Entry<String, List<String>> item: phonesByCompany.entrySet()) {
+            System.out.println(item.getKey() + ": ");
+            item.getValue().forEach(System.out::println);
+        }
     }
 }
