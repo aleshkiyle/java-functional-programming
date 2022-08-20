@@ -35,8 +35,8 @@ public class ReduceLogic {
 
     public void testReduceMethodFromBaeldung() {
         List<Integer> numbers = Arrays.asList(1,2,3,4,5);
-        int sum = numbers.stream()
-                .reduce(0, Integer::sum);
+        Integer sum = numbers.stream()
+                .reduce(0, (subtotal, element) -> subtotal + element);
         System.out.println(sum);
         double mul = numbers.stream()
                 .reduce(1, (subtotal, element) -> subtotal * element).doubleValue();

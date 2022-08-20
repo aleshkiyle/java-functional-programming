@@ -1,5 +1,6 @@
 package funcByMetanit.streamAPI.reduce;
 
+import funcByMetanit.lambdaExpressions.Printable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -42,6 +44,11 @@ public class Streams {
 
         boolean resultSumBiPredicates = biPredicate1.and(biPredicate2).test(message, 3);
         System.out.println(resultSumBiPredicates);
+        String text = "I, am: hello";
+        String[] split = text.split(",");
+        for (String symbol : split) {
+            System.out.println(symbol);
+        }
     }
 
     @Test
