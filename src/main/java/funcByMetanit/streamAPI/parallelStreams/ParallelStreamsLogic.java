@@ -1,7 +1,5 @@
 package funcByMetanit.streamAPI.parallelStreams;
 
-import funcByMetanit.lambdaExpressions.Printable;
-
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -28,7 +26,4 @@ public class ParallelStreamsLogic {
                 .filter(predicateName)
                 .forEach(System.out::println);
     }
-
-
-
 }

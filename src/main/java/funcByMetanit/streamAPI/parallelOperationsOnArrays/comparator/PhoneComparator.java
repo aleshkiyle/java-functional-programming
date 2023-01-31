@@ -2,8 +2,7 @@ package funcByMetanit.streamAPI.parallelOperationsOnArrays.comparator;
 
 import funcByMetanit.streamAPI.parallelOperationsOnArrays.data.Phone;
 
-import java.util.Comparator;
-import java.util.Locale;
+import java.util.*;
 
 public class PhoneComparator implements Comparator<Phone> {
 
@@ -12,4 +11,6 @@ public class PhoneComparator implements Comparator<Phone> {
         return o2.getName().toUpperCase(Locale.ROOT)
                 .compareTo(o2.getName().toUpperCase(Locale.ROOT));
     }
+    Map<Integer, String> map = Map.of(1, "as", 2, "sad");
+
 }
